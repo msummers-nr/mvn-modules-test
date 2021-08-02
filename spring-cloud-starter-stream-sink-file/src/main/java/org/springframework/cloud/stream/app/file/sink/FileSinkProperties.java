@@ -81,6 +81,11 @@ public class FileSinkProperties {
 	 */
 	private String suffix = "";
 
+	/**
+	 * Custom property
+	 */
+	private String customProperty = "";
+
 	public boolean isBinary() {
 		return binary;
 	}
@@ -149,6 +154,14 @@ public class FileSinkProperties {
 
 	public void setSuffix(String suffix) {
 		this.suffix = suffix;
+	}
+
+	public String getCustomProperty() {
+		return this.customProperty;
+	}
+
+	public void setCustomProperty(String customProperty) {
+		this.customProperty = customProperty;
 	}
 
 	@AssertTrue(message = "Exactly one of 'name' or 'nameExpression' must be set")

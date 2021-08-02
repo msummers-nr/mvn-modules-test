@@ -26,6 +26,8 @@ import org.springframework.integration.annotation.ServiceActivator;
 import org.springframework.integration.file.DefaultFileNameGenerator;
 import org.springframework.integration.file.FileNameGenerator;
 import org.springframework.integration.file.FileWritingMessageHandler;
+import org.springframework.cloud.stream.app.file.sink.MyMessageHandler;
+import org.springframework.cloud.stream.annotation.StreamListener;
 
 /**
  * Creates a {@link FileWritingMessageHandler} bean and registers it as a
@@ -37,11 +39,31 @@ import org.springframework.integration.file.FileWritingMessageHandler;
 @EnableConfigurationProperties(FileSinkProperties.class)
 public class FileSinkConfiguration {
 
+	/*
+	@StreamListener(Sink.INPUT)
+	public void whatever() {
+		System.out.println("======================================================");
+		System.out.println("---------> whatever");
+		System.out.println("======================================================");
+	}
+	*/
+
 	@Bean
 	@ServiceActivator(inputChannel = Sink.INPUT)
-	public FileWritingMessageHandler fileWritingMessageHandler(FileNameGenerator fileNameGenerator,
+	public MyMessageHandler fileWritingMessageHandler(FileNameGenerator fileNameGenerator,
 			FileSinkProperties properties) {
 
+		System.out.println("======================================================");
+		System.out.println("---------> File Write Message Handler v0.0.7");
+		System.out.println(fileNameGenerator);
+		System.out.println(properties);
+		System.out.println("======================================================");
+
+		return new MyMessageHandler();
+
+		//TODO: we have to create a message handler, extend AbstractReplyProducingMessageHandler and implement ManageableLifecycle, MessageTriggerAction
+		
+		/*
 		FileWritingMessageHandler handler = (properties.getDirectoryExpression() != null)
 				? new FileWritingMessageHandler(properties.getDirectoryExpression())
 				: new FileWritingMessageHandler(new File(properties.getDirectory()));
@@ -52,6 +74,8 @@ public class FileSinkConfiguration {
 		handler.setFileExistsMode(properties.getMode());
 		handler.setFileNameGenerator(fileNameGenerator);
 		return handler;
+		*/
+		
 	}
 
 	@Bean
@@ -60,5 +84,4 @@ public class FileSinkConfiguration {
 		fileNameGenerator.setExpression(properties.getNameExpression());
 		return fileNameGenerator;
 	}
-
 }
