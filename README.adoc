@@ -8,4 +8,3 @@ include::spring-cloud-starter-stream-source-file/README.adoc[]
 ## File Sink
 include::spring-cloud-starter-stream-sink-file/README.adoc[]
 
-## minor
