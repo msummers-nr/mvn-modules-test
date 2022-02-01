@@ -32,3 +32,10 @@ jobs:
 
       - name: step2
         run: echo "::notice ${{ steps.step1.outputs.JAVA_VERSION }}"
+        
+      - name: step3
+        run: echo "::set-output name=JAVA_VERSION::11"
+        shell: bash
+
+      - name: step4
+        run: echo "::notice ${{ steps.step3.outputs.JAVA_VERSION }}"
