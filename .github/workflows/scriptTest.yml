@@ -26,16 +26,16 @@ jobs:
       - uses: actions/checkout@v2
 
       # Runs a single command using the runners shell
-      - name: step1
+      - id: step1
         run: ./build-manifest.sh
         shell: bash
 
-      - name: step2
+      - id: step2
         run: echo "::notice::${{ steps.step1.outputs.JAVA_VERSION }}"
         
-      - name: step3
+      - id: step3
         run: echo "::set-output name=JAVA_VERSION::11"
         shell: bash
 
-      - name: step4
+      - id: step4
         run: echo "::notice::${{ steps.step3.outputs.JAVA_VERSION }}"
