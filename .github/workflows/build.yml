@@ -1,3 +1,6 @@
+#
+# This is the release build workflow that must be present in every repository
+#
 name: Build
 
 on:
@@ -11,12 +14,5 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: '0'
-
-
-      - name: build-java-maven
-        if: hashFiles('pom.xml') != ''
-        uses: msummers-nr/build-java-maven-action@v1
+      - name: Invoke the main build
+        uses: msummers-nr/build-main-action@v1
